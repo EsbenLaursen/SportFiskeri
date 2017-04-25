@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {FishService} from './fish.service';
-import {Fish} from './Fish';
+import {FishService} from './Services/fish.service';
+import {Fish} from './Entities/Fish';
 
 @Component({
   selector: 'app-root',
