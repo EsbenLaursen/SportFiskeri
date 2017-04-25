@@ -3,22 +3,26 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import 'hammerjs';
 import { AppComponent } from './app.component';
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
+import {FishService} from './fish.service';
+import { ToptoolbarComponent } from './toptoolbar/toptoolbar.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MdButtonModule, MdCheckboxModule, MdToolbarModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToptoolbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule,
-    Angular2FontawesomeModule
+    BrowserAnimationsModule,
+    MdToolbarModule
   ],
-  providers: [],
+  providers: [FishService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
