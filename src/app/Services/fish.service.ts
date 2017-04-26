@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Fish} from './Fish';
+import {Fish} from '../Entities/Fish';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
 
