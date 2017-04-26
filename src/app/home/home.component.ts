@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FishService} from "../Services/fish.service";
+import {Observable} from "rxjs/Observable";
+import {Fish} from "../Entities/Fish";
 
 @Component({
   selector: 'app-home',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  fishes: Observable<Fish[]>
+
+  constructor(private service: FishService) {
+    this.fishes = service.getallfishes();
+  }
 
   ngOnInit() {
   }
