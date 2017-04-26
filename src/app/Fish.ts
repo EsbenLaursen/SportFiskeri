@@ -3,5 +3,5 @@
  */
 export class Fish {
   id: number;
-  type: string;
+  Type: string;
 }

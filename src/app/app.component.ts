@@ -15,7 +15,7 @@ export class AppComponent {
 
 
   constructor(private service: FishService) {
-     this.fishes = service.getAllFishes();
+    service.getallfishes().subscribe(data => {this.fishes = data; } );
   }
 
 }

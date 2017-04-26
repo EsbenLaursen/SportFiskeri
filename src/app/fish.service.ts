@@ -11,27 +11,24 @@ export class FishService {
 
   constructor(private http: Http) {
 
-    this.fishes = [
-      { id: 1, type: 'salmon'},
-      { id: 2, type: 'trout'},
-      { id: 3, type: 'lobster'},
-      { id: 4, type: 'rocktail'},
-      { id: 5, type: 'salmon'},
-      ];
+   // this.fishes = [
+   //   { id: 1, Type: 'salmon'},
+    //  { id: 2, Type: 'trout'},
+   //   { id: 3, Type: 'lobster'},
+    //  { id: 4, Type: 'rocktail'},
+    //  { id: 5, Type: 'salmon'},
+    //  ];
   }
 
-  getAllFishes(): Fish[] {
-    return this.fishes;
+  // getAllFishes(): Fish[] {
+   // return this.fishes;
+ // }
+
+   getallfishes():  Observable<Fish[]> {
+     return this.http
+       .get('http://localhost:2240/api/Fish')
+       .map(response => response.json() as Fish[]);
   }
-
-  // getallfishes():  any {
-
-   // this.http.get('http://localhost:2240/api/fish/1').subscribe(
-   //   (resp) => { this.data = JSON.stringify(resp); );
-   //   }
-   // );
-   // return this.data;
-  // }
 
 
 }
