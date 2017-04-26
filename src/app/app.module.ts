@@ -17,6 +17,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {TopicService} from "./Services/topic.service";
 import { TopicdetailComponent } from './Forum/topicdetail/topicdetail.component';
 import {MyDataService} from "./Services/my-data.service";
+import { ListComponent } from './list/list.component';
 
 const routerConfig: Routes = [{
   path:'', component: HomeComponent},
@@ -33,7 +34,8 @@ const routerConfig: Routes = [{
     ForumIndexComponent,
     TopiclistComponent,
     TopicComponent,
-    TopicdetailComponent
+    TopicdetailComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

@@ -11,11 +11,16 @@ export class AppComponent {
   title = 'app works!';
 
   fishes: Fish[];
+  fish: Fish;
 
 
 
   constructor(private service: FishService) {
     service.getallfishes().subscribe(data => {this.fishes = data; } );
+    //new fish = {id: 0 ,type: 'salmon'}
+    //service.createFish(fish).subscribe(data => {this.fish = data; })
   }
+
+
 
 }
