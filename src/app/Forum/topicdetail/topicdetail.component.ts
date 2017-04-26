@@ -3,6 +3,7 @@ import 'rxjs/add/operator/switchMap';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {TopicService} from "../../Services/topic.service";
 import {Topic} from "../../Entities/Topic";
+import {myData, MyDataService} from "../../Services/my-data.service";
 
 @Component({
   selector: 'app-topicdetail',
@@ -11,24 +12,29 @@ import {Topic} from "../../Entities/Topic";
 })
 export class TopicdetailComponent implements OnInit {
 
-  @Input()
+
+
   topic: Topic;
-  constructor(private _router: ActivatedRoute) {
-    console.log("ergrg");
-    console.log("ergrg");
-    console.log("ergrg");
-    console.log("ergrg");
-    this._router
-      .data
-      .subscribe(v => console.log(v));
+  id: number;
+
+  constructor(private service: TopicService,
+              private sharedService: MyDataService) {
+    this.sharedService=sharedService
+
+    // til lars
+   // this._router
+   //  .queryParams
+   //  .subscribe(params => this.id = params['topicId']);
+
+    this.id = this.sharedService.getData();
+    console.log(this.id +"id");
+
+    this.topic = this.service.getTopic( this.id);
 
   }
 
   ngOnInit() {
 
-
-
-      this.topic = new Topic();
   }
 
 }

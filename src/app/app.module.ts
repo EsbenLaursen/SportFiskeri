@@ -16,11 +16,12 @@ import { TopicComponent } from './Forum/topic/topic.component';
 import { RouterModule, Routes } from '@angular/router';
 import {TopicService} from "./Services/topic.service";
 import { TopicdetailComponent } from './Forum/topicdetail/topicdetail.component';
+import {MyDataService} from "./Services/my-data.service";
 
 const routerConfig: Routes = [{
   path:'', component: HomeComponent},
   {path:'forum', component: ForumIndexComponent},
-  {    path: 'detail/:id', data : {id : 'id'},
+  {    path: 'detail/:id',
     component: TopicdetailComponent}
 ];
 
@@ -43,7 +44,7 @@ const routerConfig: Routes = [{
     RouterModule.forRoot(routerConfig)
 
   ],
-  providers: [FishService,TopicService],
+  providers: [FishService,TopicService, MyDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
