@@ -3,6 +3,7 @@ import {Topic} from "../../Entities/Topic";
 import {Router} from "@angular/router";
 import {TopicService} from "../../Services/topic.service";
 import {MyDataService} from "../../Services/my-data.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-topic',
@@ -12,7 +13,7 @@ import {MyDataService} from "../../Services/my-data.service";
 export class TopicComponent implements OnInit {
 
   @Input()
-  topic: Topic;
+  topic: Observable<Topic>;
 
   constructor(private router: Router,
               private service: TopicService,

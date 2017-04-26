@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
 import {Topic} from "../Entities/Topic";
+import {Observable} from "rxjs/Observable";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class TopicService {
 
   topics: Topic[];
 
-  constructor() {
+  constructor(private http: Http) {
 
-    this.topics = [
-      { id: 1, name: 'topic1'},
-      { id: 2, name: 'topic2'},
-      { id: 3, name: 'topic3'},
-      { id: 4, name: 'topic4'},
-      { id: 5, name: 'topic5'},
-    ];
   }
 
-  getAllTopics() : Topic[]
+  getAllTopics() : Observable<Topic[]>
   {
-      return this.topics;
+    return this.http
+      .get('http://localhost:2240/api/Topics')
+      .map(response => response.json() as Topic[]);
   }
 
-  getTopic(id: number) : Topic
+  getTopic(id: number) : Observable<Topic>
 {
-      return this.topics.find(topic => topic.id === id);
+  return this.http
+      .get('http://localhost:2240/api/Topics/' + id)
+       .map(response => response.json() as Topic);
 }
 
 

@@ -30,5 +30,11 @@ export class FishService {
        .map(response => response.json() as Fish[]);
   }
 
+ // getFish(id: number):  Observable<Fish> {
+ //   return this.http
+ //     .get('http://localhost:2240/api/Fish/' + id)
+ //     .map(response => response.json() as Fish);
+ // }
+
 
 }

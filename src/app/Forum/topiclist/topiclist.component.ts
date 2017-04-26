@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Topic} from "../../Entities/Topic";
 import {TopicService} from "../../Services/topic.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-topiclist',
@@ -14,7 +15,8 @@ export class TopiclistComponent implements OnInit {
 
 
   constructor(private service: TopicService) {
-     this.topics = service.getAllTopics();
+     service.getAllTopics().subscribe( (data) => this.topics = data);
+     console.log('in topiclist' + this.topics);
   }
 
   ngOnInit() {
