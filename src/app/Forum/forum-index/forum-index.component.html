@@ -1,2 +1,4 @@
 <p>Welcome to the forum</p>
+<button (click)="AddTopic()">{{buttontext}}</button>
+<app-createtopic *ngIf="isCreatingTopic"></app-createtopic>
 <app-topiclist></app-topiclist>

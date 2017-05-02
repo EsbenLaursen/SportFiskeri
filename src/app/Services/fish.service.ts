@@ -20,7 +20,7 @@ export class FishService {
 
   createFish(fish:Fish): Observable<Fish>{
     return this.http
-      .post('http://localhost:2240/api/Fis', JSON.stringify({fish}), {headers: this.headers})
+      .post('http://localhost:2240/api/Fish', JSON.stringify({fish}), {headers: this.headers})
        .map(resp => resp.json());
   }
 

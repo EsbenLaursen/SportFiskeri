@@ -20,6 +20,7 @@ export class TopiclistComponent implements OnInit {
   }
 
   ngOnInit() {
+   this.service.getAllTopics().subscribe( (data) => this.topics = data);
   }
 
 }

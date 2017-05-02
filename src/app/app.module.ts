@@ -14,14 +14,17 @@ import { ForumIndexComponent } from './Forum/forum-index/forum-index.component';
 import { TopiclistComponent } from './Forum/topiclist/topiclist.component';
 import { TopicComponent } from './Forum/topic/topic.component';
 import { RouterModule, Routes } from '@angular/router';
-import {TopicService} from "./Services/topic.service";
+import {TopicService} from './Services/topic.service';
 import { TopicdetailComponent } from './Forum/topicdetail/topicdetail.component';
-import {MyDataService} from "./Services/my-data.service";
+import {MyDataService} from './Services/my-data.service';
 import { ListComponent } from './list/list.component';
+import {CommentService} from './Services/comment.service';
+import {UserService} from './Services/user.service';
+import { CreatetopicComponent } from './Forum/createtopic/createtopic.component';
 
 const routerConfig: Routes = [{
-  path:'', component: HomeComponent},
-  {path:'forum', component: ForumIndexComponent},
+  path: '', component: HomeComponent},
+  {path: 'forum', component: ForumIndexComponent},
   {    path: 'detail/:id',
     component: TopicdetailComponent}
 ];
@@ -35,18 +38,19 @@ const routerConfig: Routes = [{
     TopiclistComponent,
     TopicComponent,
     TopicdetailComponent,
-    ListComponent
+    ListComponent,
+    CreatetopicComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MdToolbarModule,MdButtonModule,
+    MdToolbarModule, MdButtonModule,
     RouterModule.forRoot(routerConfig)
 
   ],
-  providers: [FishService,TopicService, MyDataService],
+  providers: [FishService, TopicService, MyDataService, CommentService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

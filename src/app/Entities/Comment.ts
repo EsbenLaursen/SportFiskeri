@@ -1,4 +1,5 @@
-import {Topic} from "./Topic";
+import {Topic} from './Topic';
+import {User} from './User';
 /**
  * Created by EsbenLaursen on 26-04-2017.
  */
@@ -6,4 +7,7 @@ import {Topic} from "./Topic";
    Id: number;
    Content: string;
     Topic: Topic;
+    TopicId: number;
+    WrittenByUser: User;
+    Date: Date;
 }

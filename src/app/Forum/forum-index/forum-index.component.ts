@@ -7,9 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForumIndexComponent implements OnInit {
 
-  constructor() { }
+  isCreatingTopic: boolean;
+  not: string;
+  yes: string;
+  buttontext: string;
+
+  constructor() {
+    this.isCreatingTopic = false;
+    this.not = 'Add Topic';
+    this.yes = ' Cancel';
+    this.buttontext = this.not;
+  }
 
   ngOnInit() {
+  }
+  AddTopic()
+  {
+      this.isCreatingTopic = !this.isCreatingTopic;
+      if (this.isCreatingTopic) {
+        this.buttontext = this.yes;
+      }else {
+        this.buttontext = this.not;
+      }
   }
 
 }
