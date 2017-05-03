@@ -36,6 +36,25 @@ export class CommentService {
 
   }
 
+  createComment2(comment: Comment): Observable<Comment>{
+    const id = comment.Topic.Id;
+
+    comment.WrittenByUser = {Id : 1};
+    comment.Topic = {Id : id};
+    comment.Date = new Date();
+
+
+    this.headers.append('Content-Type', 'application/json');
+    this.params = JSON.stringify(comment);
+    console.log('trying to create comment' + this.params);
+
+
+    return this.http
+      .post('http://localhost:2240/api/Comments', this.params, { headers: this.headers}).map(
+        (response => response.json() as Comment));
+
+  }
+
 
   getAllComments(): Observable<Comment[]> {
     return this.http
