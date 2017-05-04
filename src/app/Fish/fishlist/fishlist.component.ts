@@ -14,7 +14,14 @@ export class FishlistComponent implements OnInit {
   constructor(private fishservice: FishService) { }
 
   ngOnInit() {
-
+    this.fishservice.getallfishes().subscribe((res) => this.fish = res);
+  }
+  refreshList(event)
+  {
+    if(event.valueOf())
+    {
+      console.log('event true');
+    }
     this.fishservice.getallfishes().subscribe((res) => this.fish = res);
   }
 

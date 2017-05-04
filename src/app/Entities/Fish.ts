@@ -5,10 +5,11 @@ import {User} from "./User";
 export class Fish {
   id: number;
   Type: string;
-  Date: Date;
+  DayCaught: Date;
   Length: number;
   Weight: number;
   Bait: string;
   Location: string;
   CaughtByUser: User;
+  CaughtByUserId: number;
 }

@@ -6,7 +6,10 @@
 <label>Date : <input placeholder="Date..." type="datetime" required [(ngModel)]="fish.Date"/></label><br>
 <label>Length of fish :<input placeholder="Length..." type="number" required [(ngModel)]="fish.Length"/></label><br>
 <label>Weight of fish :<input placeholder="Weight..." type="number" required [(ngModel)]="fish.Weight"/></label><br>
-<label>Location of fishing :<input placeholder="Location..." type="text" required [(ngModel)]="fish.Location"/></label><br>
-
+<label>Location of fishing</label>
+<select name="singleSelect" [(ngModel)]="fish.Location">
+<option value="Konge å">Konge å</option>
+<option value="Sneum å">Sneum å</option></select>
+<br>
 <button> cancel </button>
-<button (click)="save()"> save </button>
+<button (click)="save(true)"> save </button>

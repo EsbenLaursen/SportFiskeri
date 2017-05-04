@@ -30,8 +30,8 @@ export class CreatetopicComponent implements OnInit {
 
   creatingNewTopic(value: boolean) {
     console.log(' creatingNewTopic - value:' + value);
-      if(value == true)
       {
+        if(value == true)
            this.service.createTopic(this.topic);
       }
       this.createTopicDone.emit(this.saveOrCancel);

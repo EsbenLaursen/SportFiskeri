@@ -26,9 +26,10 @@ import { RegisterComponent } from './Fish/register/register.component';
 import { FishlistComponent } from './Fish/fishlist/fishlist.component';
 
 const routerConfig: Routes = [{
-  path: '', component: HomeComponent},
+  path: 'home', component: HomeComponent},
   {path: 'forum', component: ForumIndexComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'list', component: FishlistComponent},
   {    path: 'detail/:id',
     component: TopicdetailComponent}
 ];

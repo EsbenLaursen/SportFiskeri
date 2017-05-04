@@ -1,4 +1,27 @@
 <p>
   home works!
 </p>
-<app-fishlist></app-fishlist>
+<div style="overflow-x: auto">
+<table>
+  <tr>
+    <th></th>
+    <th>Laks < 75 cm</th>
+    <th>Laks > 75 cm</th>
+  </tr>
+  <tr>
+  <th>Konge å</th>
+    <td>{{klessthan}}/15</td>
+    <td>{{kmorethan}}/15</td>
+</tr>
+  <tr>
+    <th>Sneum å</th>
+    <td id="reached" *ngIf="isReached">{{slessthan}}/15</td>
+
+    <td *ngIf="!isReached">{{slessthan}}/15</td>
+    <td>{{smorethan}}/15</td>
+  </tr>
+
+
+</table>
+
+</div>

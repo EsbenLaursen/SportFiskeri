@@ -28,8 +28,13 @@ export class FishService {
 
   createFish(fish:Fish): Observable<Fish>{
     fish.CaughtByUser = {Id: 1};
+    fish.CaughtByUserId = 1;
+    fish.DayCaught = new Date;
+    const para = JSON.stringify(fish);
+
+    console.log('parameter object: '+para);
     return this.http
-      .post('http://localhost:2240/api/Fish', JSON.stringify({fish}), {headers: this.headers})
+      .post('http://localhost:2240/api/Fish', para, {headers: this.headers})
        .map(resp => resp.json());
   }
 
