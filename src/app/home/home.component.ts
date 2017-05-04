@@ -10,10 +10,9 @@ import {Fish} from "../Entities/Fish";
 })
 export class HomeComponent implements OnInit {
 
-  fishes: Observable<Fish[]>
 
-  constructor(private service: FishService) {
-    this.fishes = service.getallfishes();
+
+  constructor() {
   }
 
   ngOnInit() {

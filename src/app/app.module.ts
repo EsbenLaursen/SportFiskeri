@@ -21,10 +21,14 @@ import { ListComponent } from './list/list.component';
 import {CommentService} from './Services/comment.service';
 import {UserService} from './Services/user.service';
 import { CreatetopicComponent } from './Forum/createtopic/createtopic.component';
+import { FishComponent } from './Fish/fish/fish.component';
+import { RegisterComponent } from './Fish/register/register.component';
+import { FishlistComponent } from './Fish/fishlist/fishlist.component';
 
 const routerConfig: Routes = [{
   path: '', component: HomeComponent},
   {path: 'forum', component: ForumIndexComponent},
+  {path: 'register', component: RegisterComponent},
   {    path: 'detail/:id',
     component: TopicdetailComponent}
 ];
@@ -39,7 +43,10 @@ const routerConfig: Routes = [{
     TopicComponent,
     TopicdetailComponent,
     ListComponent,
-    CreatetopicComponent
+    CreatetopicComponent,
+    FishComponent,
+    RegisterComponent,
+    FishlistComponent
   ],
   imports: [
     BrowserModule,
