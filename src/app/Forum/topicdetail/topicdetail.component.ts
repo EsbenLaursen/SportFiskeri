@@ -51,11 +51,10 @@ export class TopicdetailComponent implements OnInit {
 
        this.comment.Topic = this.topic;
       this.comment.TopicId = this.topic.Id;
-       this.commentService.createComment2(this.comment).subscribe(
-         (resp) =>
-           console.log(resp)
-          // this.service.getTopic( this.id).subscribe( (data) => this.topic = data), (err) => console.log(err)
-       );
+       this.commentService.createComment2(this.comment).subscribe( (result) => console.log(result), (err) => console.log(err),
+         () =>  this.service.getTopic( this.id).subscribe( (data) => this.topic = data));
+
+      this.service.getTopic( this.id).subscribe( (data) => this.topic = data), (err) => console.log(err);
 
 
 

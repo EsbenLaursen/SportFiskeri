@@ -12,6 +12,7 @@ export class CommentService {
 
   private headers = new Headers();
   params: string;
+  feedback: string;
 
   constructor(private http: Http,
               private service: UserService) {
@@ -36,7 +37,7 @@ export class CommentService {
 
   }
 
-  createComment2(comment: Comment): Observable<Comment>{
+  createComment2(comment: Comment) : Observable<string> {
     const id = comment.Topic.Id;
 
     comment.WrittenByUser = {Id : 1};
@@ -50,8 +51,8 @@ export class CommentService {
 
 
     return this.http
-      .post('http://localhost:2240/api/Comments', this.params, { headers: this.headers}).map(
-        (response => response.json() as Comment));
+      .post('http://localhost:2240/api/Comments', this.params, { headers: this.headers})
+      .map(response => this.feedback = response.json());
 
   }
 

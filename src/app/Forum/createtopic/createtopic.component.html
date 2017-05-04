@@ -3,5 +3,5 @@
 </p>
 <input placeholder="Title..." type="text" required [(ngModel)]="topic.Header"/>
 <input placeholder="Content..." type="text"/>
-<button> cancel </button>
-<button (click)="save()"> save </button>
+<button (click)="creatingNewTopic(false)"> cancel </button>
+<button (click)="creatingNewTopic(true)"> save </button>

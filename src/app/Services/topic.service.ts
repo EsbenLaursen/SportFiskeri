@@ -10,13 +10,14 @@ export class TopicService {
   topics: Topic[];
   private headers = new Headers();
   params: string;
+  feedback: string;
 
   constructor(private http: Http) {
     this.headers.append('Content-Type', 'application/json');
   }
 
 
-  createTopic(topic: Topic) {
+  createTopic(topic: Topic) : Observable<string> {
     topic.WrittenByUser = {Id: 1};
     topic.Date = new Date();
     this.params = JSON.stringify(topic);
@@ -25,8 +26,7 @@ export class TopicService {
 
     return this.http
       .post('http://localhost:2240/api/Topics', this.params, {headers: this.headers})
-      .subscribe(resp => console.log
-      (resp.json()));
+      .map((resp) => this.feedback = resp.json());
   }
 
   getAllTopics(): Observable<Topic[]> {

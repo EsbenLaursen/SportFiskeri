@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-forum-index',
@@ -8,15 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class ForumIndexComponent implements OnInit {
 
   isCreatingTopic: boolean;
-  not: string;
-  yes: string;
-  buttontext: string;
+   @Output('notifylist')
+   notifylistNow = new EventEmitter<boolean>();
 
   constructor() {
     this.isCreatingTopic = false;
-    this.not = 'Add Topic';
-    this.yes = ' Cancel';
-    this.buttontext = this.not;
   }
 
   ngOnInit() {
@@ -24,11 +20,13 @@ export class ForumIndexComponent implements OnInit {
   AddTopic()
   {
       this.isCreatingTopic = !this.isCreatingTopic;
-      if (this.isCreatingTopic) {
-        this.buttontext = this.yes;
-      }else {
-        this.buttontext = this.not;
-      }
+  }
+
+  createTopic(saveOrCancel: boolean)
+  {
+    this.isCreatingTopic = saveOrCancel;
+    console.log('in forum-index: createTopic' + saveOrCancel);
+    this.notifylistNow.emit(saveOrCancel);
   }
 
 }
