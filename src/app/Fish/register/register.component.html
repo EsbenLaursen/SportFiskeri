@@ -1,0 +1,12 @@
+<p>
+  register works!
+</p>
+<label> Type of fish :<input placeholder="Type..." type="text" required [(ngModel)]="fish.Type"/></label><br>
+<label>Type of bait :<input placeholder="Bait..." type="text" required [(ngModel)]="fish.Bait"/></label><br>
+<label>Date : <input placeholder="Date..." type="datetime" required [(ngModel)]="fish.Date"/></label><br>
+<label>Length of fish :<input placeholder="Length..." type="number" required [(ngModel)]="fish.Length"/></label><br>
+<label>Weight of fish :<input placeholder="Weight..." type="number" required [(ngModel)]="fish.Weight"/></label><br>
+<label>Location of fishing :<input placeholder="Location..." type="text" required [(ngModel)]="fish.Location"/></label><br>
+
+<button> cancel </button>
+<button (click)="save()"> save </button>
