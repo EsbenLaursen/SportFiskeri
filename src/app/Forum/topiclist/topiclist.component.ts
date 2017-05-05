@@ -11,8 +11,8 @@ import {Observable} from "rxjs/Observable";
 export class TopiclistComponent implements OnInit {
 
   topics: Topic[];
-
-  //@Input()
+  @Input()
+  updatelist: Topic[];
 
 
   constructor(private service: TopicService) {
@@ -21,12 +21,15 @@ export class TopiclistComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.service.getAllTopics().subscribe( (data) => this.topics = data);
+
+      console.log(!!this.updatelist);
+      console.log(this.updatelist.length);
+     this.service.getAllTopics().subscribe( (data) => this.topics = data);
   }
 
   notifyListEvent(value: boolean)
   {
-      console.log('wup wup');
   }
+
 
 }

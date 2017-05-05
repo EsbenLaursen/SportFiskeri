@@ -33,10 +33,19 @@ export class CreatetopicComponent implements OnInit {
       {
         if(value === true){
 
-          this.service.createTopic(this.topic);
+          this.service.createTopic(this.topic).subscribe((data) => console.log(JSON.stringify(data)),
+            (err) => console.log(err), ()=> this.Callback());
         }
       }
-      this.createTopicDone.emit(this.saveOrCancel);
+
+  }
+
+  private Callback() {
+    console.log('navigatong');
+
+    this.router.navigate(['']);
+    this.router.navigate(['/forum']);
+    this.createTopicDone.emit(this.saveOrCancel);
   }
 
 }

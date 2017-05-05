@@ -1,0 +1,12 @@
+<p>
+  usercreate works!
+</p>
+
+<label> Name :<input placeholder="Name..." type="text" required [(ngModel)]="user.Name"/></label><br>
+<label>Email :<input placeholder="Mail.." type="text" required [(ngModel)]="user.Email"/></label><br>
+<label>Phone nr : <input placeholder="phone..." type="text" required [(ngModel)]="user.PhoneNr"/></label><br>
+<label>Password :<input placeholder="pass..." type="password" required [(ngModel)]="user.Password"/></label><br>
+
+
+<button (click)="createUser(user)"> save </button>
+

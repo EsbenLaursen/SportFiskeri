@@ -24,11 +24,17 @@ import { CreatetopicComponent } from './Forum/createtopic/createtopic.component'
 import { FishComponent } from './Fish/fish/fish.component';
 import { RegisterComponent } from './Fish/register/register.component';
 import { FishlistComponent } from './Fish/fishlist/fishlist.component';
+import { UserComponent } from './User/user/user.component';
+import { UsercreateComponent } from './User/usercreate/usercreate.component';
+import { UserloginComponent } from './User/userlogin/userlogin.component';
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 const routerConfig: Routes = [{
   path: 'home', component: HomeComponent},
   {path: 'forum', component: ForumIndexComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'login', component: UserloginComponent},
+  {path: 'create', component: UsercreateComponent},
   {path: 'list', component: FishlistComponent},
   {    path: 'detail/:id',
     component: TopicdetailComponent}
@@ -47,7 +53,10 @@ const routerConfig: Routes = [{
     CreatetopicComponent,
     FishComponent,
     RegisterComponent,
-    FishlistComponent
+    FishlistComponent,
+    UserComponent,
+    UsercreateComponent,
+    UserloginComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +64,7 @@ const routerConfig: Routes = [{
     HttpModule,
     BrowserAnimationsModule,
     MdToolbarModule, MdButtonModule,
+    FlexLayoutModule,
     RouterModule.forRoot(routerConfig)
 
   ],

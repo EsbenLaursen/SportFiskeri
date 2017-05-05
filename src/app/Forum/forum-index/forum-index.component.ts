@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Topic} from "../../Entities/Topic";
+import {TopicService} from "../../Services/topic.service";
 
 @Component({
   selector: 'app-forum-index',
@@ -8,11 +10,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class ForumIndexComponent implements OnInit {
 
   isCreatingTopic: boolean;
-   @Output('notifylist')
-   notifylistNow = new EventEmitter<boolean>();
 
-  constructor() {
+
+  constructor(private tservice:TopicService) {
     this.isCreatingTopic = false;
+
+
   }
 
   ngOnInit() {
@@ -26,7 +29,14 @@ export class ForumIndexComponent implements OnInit {
   {
     this.isCreatingTopic = saveOrCancel;
     console.log('in forum-index: createTopic' + saveOrCancel);
-    this.notifylistNow.emit(saveOrCancel);
+    // this.notifylistNow.emit(saveOrCancel);
+    this.updatethislist();
+  }
+
+  updatethislist()
+  {
+    let t: Topic[];
+    return this.tservice.getAllTopics().subscribe((data) => t = data);
   }
 
 }
