@@ -1,15 +1,53 @@
 <p>
   register works!
 </p>
-<label> Type of fish :<input placeholder="Type..." type="text" required [(ngModel)]="fish.Type"/></label><br>
-<label>Type of bait :<input placeholder="Bait..." type="text" required [(ngModel)]="fish.Bait"/></label><br>
-<label>Date : <input placeholder="Date..." type="datetime" required [(ngModel)]="fish.Date"/></label><br>
-<label>Length of fish :<input placeholder="Length..." type="number" required [(ngModel)]="fish.Length"/></label><br>
-<label>Weight of fish :<input placeholder="Weight..." type="number" required [(ngModel)]="fish.Weight"/></label><br>
+
+
+<ngb-datepicker name="dp" #dp [(ngModel)]="modelfordate" (navigate)="date = $event.next"></ngb-datepicker>
+<form #registerfish="ngForm"   (ngSubmit)="save(true)">
+<label> Type of fish:
+
+  <select name="singleSelect" required [(ngModel)]="fish.Type">
+    <option value="Salmon">Salmon</option>
+    <option value="Sea Trout">Sea Trout</option>
+    <option value="Brown Trout">Brown Trout</option>
+    <option value="Rainbow Trout">Rainbow Trout</option>
+    <option value="Bream">Bream</option>
+    <option value="Pike">Pike</option>
+    <option value="Grayling">Grayling</option>
+    <option value="Flounder">Flounder</option>
+    <option value="Plaice">Plaice</option>
+    <option value="Other">Other</option>
+  </select>
+</label>
+  <br>
+<label>Type of bait:
+  <input name="bait" placeholder="Bait..." type="text" required [(ngModel)]="fish.Bait"/>
+</label>
+  <br>
+<label>Date:
+
+
+  <input class="form-control" name="date" placeholder="Date..."  required [(ngModel)]="modelfordate" />
+</label>
+  <br>
+<label>Length of fish:
+  <input name="length" placeholder="Length..." type="number" required [(ngModel)]="fish.Length"/>
+</label>
+  <br>
+<label>Weight of fish:
+  <input name="weight" placeholder="Weight..." type="number" required [(ngModel)]="fish.Weight"/>
+</label>
+  <br>
 <label>Location of fishing</label>
-<select name="singleSelect" [(ngModel)]="fish.Location">
+<select name="singleSelect" required [(ngModel)]="fish.Location">
 <option value="Konge å">Konge å</option>
 <option value="Sneum å">Sneum å</option></select>
-<br>
+<br><br>
+    <div [hidden]="registerfish.form.valid" class="fill-form-red">
+       Fill out all the fields!
+    </div>
+
 <button> cancel </button>
-<button (click)="save(true)"> save </button>
+<button type="submit" [disabled]="!registerfish.form.valid"> save </button>
+</form>
