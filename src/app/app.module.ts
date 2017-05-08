@@ -27,7 +27,8 @@ import { FishlistComponent } from './Fish/fishlist/fishlist.component';
 import { UserComponent } from './User/user/user.component';
 import { UsercreateComponent } from './User/usercreate/usercreate.component';
 import { UserloginComponent } from './User/userlogin/userlogin.component';
-import { FlexLayoutModule } from '@angular/flex-layout'
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const routerConfig: Routes = [{
   path: 'home', component: HomeComponent},
@@ -65,6 +66,7 @@ const routerConfig: Routes = [{
     BrowserAnimationsModule,
     MdToolbarModule, MdButtonModule,
     FlexLayoutModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(routerConfig)
 
   ],
