@@ -24,8 +24,7 @@ import { FishComponent } from './Fish/fish/fish.component';
 import { RegisterComponent } from './Fish/register/register.component';
 import { FishlistComponent } from './Fish/fishlist/fishlist.component';
 import { UserComponent } from './User/user/user.component';
-import { UsercreateComponent } from './User/usercreate/usercreate.component';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { UsercreateComponent } from './User/usercreate/usercreate.component'
 import { LoginComponent } from './User/login/login.component';
 import { LoginViewComponent } from './User/login/login-view.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -66,7 +65,6 @@ const routerConfig: Routes = [{
     FormsModule,
     HttpModule,
     BrowserAnimationsModule, MaterialModule,
-    FlexLayoutModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(routerConfig)
 
