@@ -28,7 +28,7 @@ import { UsercreateComponent } from './User/usercreate/usercreate.component'
 import { LoginComponent } from './User/login/login.component';
 import { LoginViewComponent } from './User/login/login-view.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routerConfig: Routes = [{
   path: 'home', component: HomeComponent},
@@ -64,6 +64,7 @@ const routerConfig: Routes = [{
     BrowserModule,
     FormsModule,
     HttpModule,
+    FlexLayoutModule,
     BrowserAnimationsModule, MaterialModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(routerConfig)
