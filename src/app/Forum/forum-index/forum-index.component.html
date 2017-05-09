@@ -1,4 +1,4 @@
 <p>Welcome to the forum</p>
-<button *ngIf="!isCreatingTopic" (click)="AddTopic()">Add topic</button>
-<app-createtopic *ngIf="isCreatingTopic" (createtopic)="createTopic($event)"></app-createtopic>
-<app-topiclist [updatelist]="updatethislist()" (notifylist)="notifyListEvent($event)"></app-topiclist>
+<button *ngIf="!isCreatingTopic" (click)="ShowAddTopic(true)">Add topic</button>
+<app-createtopic *ngIf="isCreatingTopic" (createTopicDone)="AddTopic($event)"></app-createtopic>
+<app-topiclist [topics]="topics"></app-topiclist>

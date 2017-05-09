@@ -13,12 +13,14 @@ export class RegisterComponent implements OnInit {
 
   fish: Fish;
   modelfordate: NgbDateStruct;
-  date: {year: number, month: number};
+  date: Date;
   constructor(private fishservice: FishService, private router:Router) {
     this.fish = new Fish();
+    this.date = new Date();
   }
 
   ngOnInit() {
+
   }
 save(saveOrCancel: boolean)
 {
@@ -28,7 +30,5 @@ save(saveOrCancel: boolean)
     this.fishservice.createFish(this.fish).subscribe((data) => console.log(data), (err) => console.log(err),
       ()=> this.router.navigate(['/list']));
   }
-
-
 }
 }

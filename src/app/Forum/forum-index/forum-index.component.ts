@@ -10,33 +10,46 @@ import {TopicService} from "../../Services/topic.service";
 export class ForumIndexComponent implements OnInit {
 
   isCreatingTopic: boolean;
-
+  topics: Topic[];
 
   constructor(private tservice:TopicService) {
     this.isCreatingTopic = false;
 
-
+this.topics= [];
   }
 
   ngOnInit() {
+    this.tservice.getAllTopics().subscribe((data) => {
+      this.topics = data;
+    });
+
   }
-  AddTopic()
+  ShowAddTopic(show:boolean){
+
+      this.isCreatingTopic = show;
+  }
+
+
+
+  AddTopic(topic: Topic)
   {
-      this.isCreatingTopic = !this.isCreatingTopic;
+    this.ShowAddTopic(false);
+    if(topic !== null && topic){
+      this.tservice.createTopic(topic).subscribe((data) => {
+        this.tservice.getAllTopics().subscribe((topicsNew) => {
+          this.topics = topicsNew;
+        });
+      }, (err) => console.log(err));
+
+    }
+
+
   }
 
   createTopic(saveOrCancel: boolean)
   {
     this.isCreatingTopic = saveOrCancel;
     console.log('in forum-index: createTopic' + saveOrCancel);
-    // this.notifylistNow.emit(saveOrCancel);
-    this.updatethislist();
-  }
-
-  updatethislist()
-  {
-    let t: Topic[];
-    return this.tservice.getAllTopics().subscribe((data) => t = data);
   }
 
 }

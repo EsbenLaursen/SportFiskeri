@@ -15,13 +15,12 @@ export class CreatetopicComponent implements OnInit {
 
   saveOrCancel: boolean;
 
-  @Output('createtopic')
-    createTopicDone = new EventEmitter<boolean>();
+  @Output()
+    createTopicDone = new EventEmitter<Topic>();
 
   topic: Topic;
 
-  constructor(private service: TopicService,
-              private router: Router) {
+  constructor() {
     this.topic = new Topic();
   }
 
@@ -31,21 +30,14 @@ export class CreatetopicComponent implements OnInit {
   creatingNewTopic(value: boolean) {
     console.log(' creatingNewTopic - value:' + value);
       {
-        if(value === true){
-
-          this.service.createTopic(this.topic).subscribe((data) => console.log(JSON.stringify(data)),
-            (err) => console.log(err), ()=> this.Callback());
+        if(value){
+            this.createTopicDone.emit(this.topic);
+        }
+        else{
+          this.createTopicDone.emit(null);
         }
       }
 
-  }
-
-  private Callback() {
-    console.log('navigatong');
-
-    this.router.navigate(['']);
-    this.router.navigate(['/forum']);
-    this.createTopicDone.emit(this.saveOrCancel);
   }
 
 }

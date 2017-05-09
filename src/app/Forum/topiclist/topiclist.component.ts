@@ -10,25 +10,18 @@ import {Observable} from "rxjs/Observable";
 })
 export class TopiclistComponent implements OnInit {
 
-  topics: Topic[];
   @Input()
-  updatelist: Topic[];
+  topics: Topic[];
 
 
-  constructor(private service: TopicService) {
-     service.getAllTopics().subscribe( (data) => this.topics = data);
-     console.log('in topiclist' + this.topics);
+  constructor() {
+    this.topics = [];
   }
 
   ngOnInit() {
 
-      console.log(!!this.updatelist);
-      console.log(this.updatelist.length);
-     this.service.getAllTopics().subscribe( (data) => this.topics = data);
-  }
-
-  notifyListEvent(value: boolean)
-  {
+      console.log(!!this.topics);
+      console.log(this.topics.length);
   }
 
 
