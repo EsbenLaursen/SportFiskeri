@@ -13,6 +13,7 @@ export class CommentService {
   private headers = new Headers();
   params: string;
   feedback: string;
+  url: string = "http://localhost:53596/api/";
 
   constructor(private http: Http,
               private service: UserService) {
@@ -32,7 +33,7 @@ export class CommentService {
 
 
     return this.http
-      .post('http://localhost:2240/api/Comments', this.params, { headers: this.headers})
+      .post(this.url + 'Comments', this.params, { headers: this.headers})
       .subscribe(resp => console.log(resp.json()));
 
   }
@@ -51,7 +52,7 @@ export class CommentService {
 
 
     return this.http
-      .post('http://localhost:2240/api/Comments', this.params, { headers: this.headers})
+      .post(this.url + 'Comments', this.params, { headers: this.headers})
       .map(response => this.feedback = response.json());
 
   }
@@ -59,20 +60,20 @@ export class CommentService {
 
   getAllComments(): Observable<Comment[]> {
     return this.http
-      .get('http://localhost:2240/api/Comment')
+      .get(this.url + 'Comment')
       .map(response => response.json() as Comment[]);
   }
 
   getComment(id: number): Observable<Comment> {
     return this.http
-      .get('http://localhost:2240/api/Comment/' + id)
+      .get(this.url + 'Comment/' + id)
       .map(response => response.json() as Comment);
   }
 
   // TODO
   getCommentsWithTopicId(id: number): Observable<Comment> {
     return this.http
-      .get('http://localhost:2240/api/Comment/ ???' + id)
+      .get(this.url + 'Comment/ ???' + id)
       .map(response => response.json() as Comment);
   }
 

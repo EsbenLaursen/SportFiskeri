@@ -11,6 +11,7 @@ export class TopicService {
   private headers = new Headers();
   params: string;
   feedback: string;
+  url: string = "http://localhost:53596/api/";
 
   constructor(private http: Http) {
     this.headers.append('Content-Type', 'application/json');
@@ -25,32 +26,32 @@ export class TopicService {
 
 
     return this.http
-      .post('http://localhost:2240/api/Topics', this.params, {headers: this.headers})
+      .post(this.url + 'Topics', this.params, {headers: this.headers})
       .map((resp) => this.feedback = resp.json());
   }
 
   getAllTopics(): Observable<Topic[]> {
     return this.http
-      .get('http://localhost:2240/api/Topics')
+      .get(this.url + 'Topics')
       .map(response => response.json() as Topic[]);
   }
 
   getTopic(id: number): Observable<Topic> {
     return this.http
-      .get('http://localhost:2240/api/Topics/' + id)
+      .get(this.url + 'Topics/' + id)
       .map(response => response.json() as Topic);
   }
 
   putTopic(topic: Topic) {
     topic.Header = 'new title' + topic.Id;
     this.params = JSON.stringify(topic);
-    return this.http.put('http://localhost:2240/api/Topics/' + topic.Id,
+    return this.http.put(this.url + 'Topics/' + topic.Id,
       this.params, {headers: this.headers})
       .subscribe(resp => console.log(resp.ok));
   }
 
   deleteTopic(topic: Topic) {
-      return this.http.delete('http://localhost:2240/api/Topics/' + topic.Id)
+      return this.http.delete(this.url + 'Topics/' + topic.Id)
         .subscribe(resp => console.log(resp.ok));
   }
 

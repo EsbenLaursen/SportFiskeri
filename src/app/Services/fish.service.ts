@@ -9,19 +9,20 @@ export class FishService {
 
   fishes: Fish[];
   params: string;
+  url: string = "http://localhost:53596/api/";
   private headers = new Headers({'Content-Type': 'application/json'});
   constructor(private http: Http) {
   }
 
    getallfishes():  Observable<Fish[]> {
      return this.http
-       .get('http://localhost:2240/api/Fish')
+       .get(this.url + 'Fish')
        .map(response => response.json() as Fish[]);
   }
 
   getFish(id: number): Observable<Fish> {
     return this.http
-      .get('http://localhost:2240/api/Fish/' + id)
+      .get(this.url + 'Fish/' + id)
       .map(response => response.json() as Fish);
   }
 
@@ -33,20 +34,20 @@ export class FishService {
 
     console.log('parameter object: '+para);
     return this.http
-      .post('http://localhost:2240/api/Fish', para, {headers: this.headers})
+      .post(this.url + 'Fish', para, {headers: this.headers})
        .map(resp => resp.json());
   }
 
   putFish(fish: Fish) {
     fish.Type = 'new type' + fish.id;
     this.params = JSON.stringify(fish);
-    return this.http.put('http://localhost:2240/api/Fish/' + fish.id,
+    return this.http.put(this.url + 'Fish/' + fish.id,
       this.params, {headers: this.headers})
       .subscribe(resp => console.log(resp.ok));
   }
 
   deleteFish(fish: Fish) {
-    return this.http.delete('http://localhost:2240/api/Fish/' + fish.id)
+    return this.http.delete(this.url + 'Fish/' + fish.id)
       .subscribe(resp => console.log(resp.ok));
   }
 }
