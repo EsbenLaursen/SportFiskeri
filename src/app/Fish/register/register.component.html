@@ -1,53 +1,53 @@
-<p>
-  register works!
-</p>
+<form #registerfish="ngForm" (ngSubmit)="save(true)">
+  <div fxFlexFill [fxLayout]="'row'" fxLayoutAlign="center center">
+    <md-card class="login-card">
+      <md-card-header fxLayoutAlign="center center">
+      <span class="md-title">Register fish</span>
+      </md-card-header>
+      <md-card-content>
+      <div>
+        <label> Type of fish:
+          <select  name="singleSelect" required [(ngModel)]="fish.Type">
+            <option value="Salmon">Salmon</option>
+            <option value="Sea Trout">Sea Trout</option>
+            <option value="Brown Trout">Brown Trout</option>
+            <option value="Rainbow Trout">Rainbow Trout</option>
+            <option value="Bream">Bream</option>
+            <option value="Pike">Pike</option>
+            <option value="Grayling">Grayling</option>
+            <option value="Flounder">Flounder</option>
+            <option value="Plaice">Plaice</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+      </div>
+        <md-input-container>
+            <input mdInput name="Bait" placeholder="Type of bait..." type="text" required [(ngModel)]="fish.Bait"/>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput name="length" placeholder="Length of fish..." type="number" required [(ngModel)]="fish.Length"/>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput name="weight" placeholder="Weight of fish..." type="number" required [(ngModel)]="fish.Weight"/>
+        </md-input-container>
+        <div>
+        <label>Location of fishing:</label>
+        <select name="singleEsben" required [(ngModel)]="fish.Location">
+          <option value="Konge å">Konge å</option>
+          <option value="Sneum å">Sneum å</option>
+        </select></div>
+        <br>
+        <ngb-datepicker name="dp" required [(ngModel)]="modelfordate"></ngb-datepicker>
+        <br>
+        <div [hidden]="registerfish.form.valid" class="fill-form-red">
+          Fill out all the fields!
+        </div>
 
-
-<ngb-datepicker name="dp" #dp [(ngModel)]="modelfordate" (navigate)="date = $event.next"></ngb-datepicker>
-<form #registerfish="ngForm"   (ngSubmit)="save(true)">
-<label> Type of fish:
-
-  <select name="singleSelect" required [(ngModel)]="fish.Type">
-    <option value="Salmon">Salmon</option>
-    <option value="Sea Trout">Sea Trout</option>
-    <option value="Brown Trout">Brown Trout</option>
-    <option value="Rainbow Trout">Rainbow Trout</option>
-    <option value="Bream">Bream</option>
-    <option value="Pike">Pike</option>
-    <option value="Grayling">Grayling</option>
-    <option value="Flounder">Flounder</option>
-    <option value="Plaice">Plaice</option>
-    <option value="Other">Other</option>
-  </select>
-</label>
-  <br>
-<label>Type of bait:
-  <input name="bait" placeholder="Bait..." type="text" required [(ngModel)]="fish.Bait"/>
-</label>
-  <br>
-<label>Date:
-
-
-  <input class="form-control" name="datefield" placeholder="Date..."  required value="{{date}}" />
-</label>
-  <br>
-<label>Length of fish:
-  <input name="length" placeholder="Length..." type="number" required [(ngModel)]="fish.Length"/>
-</label>
-  <br>
-<label>Weight of fish:
-  <input name="weight" placeholder="Weight..." type="number" required [(ngModel)]="fish.Weight"/>
-</label>
-  <br>
-<label>Location of fishing</label>
-<select name="singleSelect" required [(ngModel)]="fish.Location">
-<option value="Konge å">Konge å</option>
-<option value="Sneum å">Sneum å</option></select>
-<br><br>
-    <div [hidden]="registerfish.form.valid" class="fill-form-red">
-       Fill out all the fields!
-    </div>
-
-<button> cancel </button>
-<button type="submit" [disabled]="!registerfish.form.valid"> save </button>
+        <md-card-actions fxLayoutAlign="center center">
+          <button> cancel</button>
+          <button type="submit" [disabled]="!registerfish.form.valid"> save</button>
+        </md-card-actions>
+      </md-card-content>
+    </md-card>
+  </div>
 </form>
