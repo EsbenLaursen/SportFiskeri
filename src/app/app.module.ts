@@ -29,11 +29,12 @@ import { LoginComponent } from './User/login/login.component';
 import { LoginViewComponent } from './User/login/login-view.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {AuthGuard} from "./User/login/auth-guard";
 
 const routerConfig: Routes = [{
   path: 'home', component: HomeComponent},
   {path: 'forum', component: ForumIndexComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'create', component: UsercreateComponent},
   {path: 'list', component: FishlistComponent},
@@ -71,7 +72,7 @@ const routerConfig: Routes = [{
 
 
   ],
-  providers: [FishService, TopicService, MyDataService, CommentService, UserService],
+  providers: [FishService, TopicService, MyDataService, CommentService, UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

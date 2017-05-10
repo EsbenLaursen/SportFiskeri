@@ -13,8 +13,11 @@ export class TopicService {
   feedback: string;
   url: string = "http://localhost:53596/api/";
 
+
+
   constructor(private http: Http) {
-    this.headers.append('Content-Type', 'application/json');
+   this.headers.append('Content-Type', 'application/json');
+
   }
 
 
@@ -22,8 +25,10 @@ export class TopicService {
     topic.WrittenByUser = {Id: 1};
     topic.Date = new Date();
     this.params = JSON.stringify(topic);
-    console.log('trying to create topic' + this.params);
+    console.log(sessionStorage.getItem('token'));
 
+    let t = sessionStorage.getItem('token');
+    this.headers.append('Authorization', 'Basic ' + t);
 
     return this.http
       .post(this.url + 'Topics', this.params, {headers: this.headers})

@@ -12,4 +12,9 @@ export class ToptoolbarComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  clearSession()
+  {
+      sessionStorage.clear();
+  }
 }

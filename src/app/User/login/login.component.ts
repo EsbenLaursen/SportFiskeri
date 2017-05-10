@@ -9,9 +9,11 @@ import {UserService} from "../../Services/user.service";
 })
 export class LoginComponent implements OnInit {
 
+  requestString: string;
+
   params: string;
-  feedback: string;
-  private headers = new Headers({'Content-Type': 'application/json'});
+  feedback: { access_token: string};
+  private headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 
   constructor(private http: Http) { }
 
@@ -26,7 +28,12 @@ export class LoginComponent implements OnInit {
     this.params = JSON.stringify(user);
     console.log(this.params);
 
-    this.http.post('http://localhost:2240/api/Login', this.params, {headers: this.headers}).subscribe((resp) => console.log(resp.json()), (err)=> console.log(err), ()=> console.log('logged in'));
+    this.requestString = "grant_type=password&username=" + user.Name + " &password=" + user.Password;
+
+    this.http.post('http://localhost:53596/token', this.requestString, { headers: this.headers } ).subscribe(
+      (data) => this.feedback = data.json(), ()=> {}, () => sessionStorage.setItem('token', this.feedback.access_token)
+    );
+
 
   }
 

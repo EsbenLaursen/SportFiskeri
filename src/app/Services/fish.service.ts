@@ -10,19 +10,20 @@ export class FishService {
   fishes: Fish[];
   params: string;
   url: string = "http://localhost:53596/api/";
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers : Headers;
   constructor(private http: Http) {
+    this.headers = new Headers({'Content-Type': 'application/json'});
   }
 
    getallfishes():  Observable<Fish[]> {
      return this.http
-       .get(this.url + 'Fish')
+       .get('http://localhost:53596/api/Fish')
        .map(response => response.json() as Fish[]);
   }
 
   getFish(id: number): Observable<Fish> {
     return this.http
-      .get(this.url + 'Fish/' + id)
+      .get('http://localhost:53596/api/Fish/' + id)
       .map(response => response.json() as Fish);
   }
 
