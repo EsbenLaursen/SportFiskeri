@@ -1,7 +1,49 @@
-<p>
-  fishlist works!
-</p>
+<table >
+  <tr >
+    <th>
+      <P>Type</P>
+    </th>
+    <th>
+      <p>Location</p>
+    </th>
+    <th>
+      <p>Weight</p>
+    </th>
+    <th>
+      <p>Length</p>
+    </th>
+    <th>
+      <p>Bait</p>
+    </th>
+    <th>
+      <p>Day caught</p>
+    </th>
+    <th>
+      <p>Caught by</p>
+    </th>
+  </tr>
+  <tr *ngFor="let f of fish">
+      <td>
+      {{f.Type}}
+    </td>
+      <td>
+        {{f.Location}}
+      </td>
+    <td>
+      {{f.Weight}}
+    </td>
+    <td>
+      {{f.Length}}
+    </td>
+    <td>
+      {{f.Bait}}
+    </td>
+    <td>
+      {{f.DayCaught.replace('/Date(','').replace(')/','') | date:"MM/dd/yyyy"}}
+    </td>
+    <td>
+      {{f.CaughtByUser.Name}}
+    </td>
+  </tr>
 
-<div *ngFor="let f of fish">
-  {{f.Type}}
-</div>
+</table>

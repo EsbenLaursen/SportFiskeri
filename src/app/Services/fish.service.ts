@@ -29,7 +29,6 @@ export class FishService {
   createFish(fish:Fish): Observable<Fish>{
     fish.CaughtByUser = {Id: 1};
     fish.CaughtByUserId = 1;
-    fish.DayCaught = new Date;
     const para = JSON.stringify(fish);
 
     console.log('parameter object: '+para);
