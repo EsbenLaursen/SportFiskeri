@@ -3,6 +3,7 @@
  */
 export class User {
   Name?: string;
+  Username?: string;
   Email?: string;
   PhoneNr?: string;
   Password?: string;
