@@ -61,8 +61,13 @@ export class TopicService {
   }
 
   deleteTopic(topic: Topic) {
-      return this.http.delete(this.url + 'Topics/' + topic.Id)
+    let t = sessionStorage.getItem('token');
+    this.headers.append('Authorization', 'Basic ' + t);
+
+      return this.http.delete(this.url + 'Topics/' + topic.Id,  {headers: this.headers})
         .subscribe(resp => console.log(resp.ok));
+
+
   }
 
 
