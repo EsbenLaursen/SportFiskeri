@@ -30,6 +30,7 @@ import { LoginViewComponent } from './User/login/login-view.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {AuthGuard} from "./User/login/auth-guard";
+import {LoginService} from "./Services/login.service";
 
 const routerConfig: Routes = [{
   path: 'home', component: HomeComponent},
@@ -72,7 +73,7 @@ const routerConfig: Routes = [{
 
 
   ],
-  providers: [FishService, TopicService, MyDataService, CommentService, UserService, AuthGuard],
+  providers: [FishService, TopicService, MyDataService, CommentService, UserService, AuthGuard, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

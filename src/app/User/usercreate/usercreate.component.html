@@ -1,12 +1,27 @@
 <p>
   usercreate works!
 </p>
-
-<label> Name :<input placeholder="Name..." type="text" required [(ngModel)]="user.Name"/></label><br>
-<label>Email :<input placeholder="Mail.." type="Email" required [(ngModel)]="user.Email"/></label><br>
-<label>Phone nr : <input placeholder="phone..." type="text" required [(ngModel)]="user.PhoneNr"/></label><br>
-<label>Password :<input placeholder="pass..." type="password" required [(ngModel)]="user.Password"/></label><br>
-
+<div  fxFlexFill [fxLayout]="'row'" fxLayoutAlign="center center">
+  <md-card class="register-card">
+    <md-card-header fxLayoutAlign="center center">
+      <span class="md-title">Create user</span>
+    </md-card-header>
+    <md-card-content>
+<md-input-container>
+<input mdInput placeholder="Type name..." type="text" required [(ngModel)]="user.Name"/>
+    </md-input-container>
+      <md-input-container>
+<input mdInput placeholder="Mail.." type="Email" required [(ngModel)]="user.Email"/>
+      </md-input-container>
+      <md-input-container>
+<input mdInput placeholder="phone..." type="text" required [(ngModel)]="user.PhoneNr"/>
+      </md-input-container>
+      <md-input-container>
+<input mdInput placeholder="pass..." type="password" required [(ngModel)]="user.Password"/>
+      </md-input-container>
 
 <button (click)="createUser(user)"> save </button>
+  </md-card-content>
 
+  </md-card>
+</div>
