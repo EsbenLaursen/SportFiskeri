@@ -1,8 +1,4 @@
-<p>
-  login-view works!
-</p>
-
-<form (ngSubmit)="tryLogin($event)">
+<form class="login" (ngSubmit)="tryLogin($event)">
   <div fxFlexFill [fxLayout]="'row'" fxLayoutAlign="center center">
     <md-card class="login-card">
       <md-card-content>
@@ -12,7 +8,7 @@
         <md-input-container>
           <input mdInput name="password" placeholder="Password" [(ngModel)]="user.Password"/>
         </md-input-container>
-        <md-card-actions>
+        <md-card-actions fxLayoutAlign="center center">
           <button md-button type="submit">Login</button>
           <button routerLink="/create" md-button >Create</button>
         </md-card-actions>

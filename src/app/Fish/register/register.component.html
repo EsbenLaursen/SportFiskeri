@@ -1,4 +1,4 @@
-<form #registerfish="ngForm" (ngSubmit)="save(true)">
+<form class="register-form" #registerfish="ngForm" (ngSubmit)="save(true)">
   <div fxFlexFill [fxLayout]="'row'" fxLayoutAlign="center center">
     <md-card class="login-card">
       <md-card-header fxLayoutAlign="center center">
@@ -45,7 +45,7 @@
 
         <md-card-actions fxLayoutAlign="center center">
           <button> cancel</button>
-          <button type="submit" [disabled]="!registerfish.form.valid"> save</button>
+          <button md-button class="md-primary"  type="submit" [disabled]="!registerfish.form.valid"> save</button>
         </md-card-actions>
       </md-card-content>
     </md-card>

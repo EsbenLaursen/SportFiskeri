@@ -1,6 +1,4 @@
-<p>
-  usercreate works!
-</p>
+
 <div  fxFlexFill [fxLayout]="'row'" fxLayoutAlign="center center">
   <md-card class="register-card">
     <md-card-header fxLayoutAlign="center center">
@@ -9,18 +7,22 @@
     <md-card-content>
 <md-input-container>
 <input mdInput placeholder="Type name..." type="text" required [(ngModel)]="user.Name"/>
-    </md-input-container>
+    </md-input-container><br>
       <md-input-container>
-<input mdInput placeholder="Mail.." type="Email" required [(ngModel)]="user.Email"/>
-      </md-input-container>
+        <input mdInput placeholder="Type username..." type="text" required [(ngModel)]="user.Name"/>
+      </md-input-container><br>
       <md-input-container>
-<input mdInput placeholder="phone..." type="text" required [(ngModel)]="user.PhoneNr"/>
-      </md-input-container>
+<input mdInput placeholder="Type Mail.." type="Email" required [(ngModel)]="user.Email"/>
+      </md-input-container><br>
       <md-input-container>
-<input mdInput placeholder="pass..." type="password" required [(ngModel)]="user.Password"/>
-      </md-input-container>
-
-<button (click)="createUser(user)"> save </button>
+<input mdInput placeholder="Type Phonenumber..." type="text" required [(ngModel)]="user.PhoneNr"/>
+      </md-input-container><br>
+      <md-input-container>
+<input mdInput placeholder="Type Password..." type="password" required [(ngModel)]="user.Password"/>
+      </md-input-container><br>
+<md-card-actions>
+<button md-button (click)="createUser(user)"> save </button>
+</md-card-actions>
   </md-card-content>
 
   </md-card>
