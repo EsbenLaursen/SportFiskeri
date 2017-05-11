@@ -7,12 +7,12 @@ import {UserService} from "./user.service";
 export class LoginService {
 
   requestString: string;
-
+  userId: number;
   params: string;
   feedback: { access_token: string};
 
   private headers: Headers;
-  constructor(private http: Http, private service: UserService) {
+  constructor(private http: Http, private userService: UserService) {
     this.headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 
   }
@@ -22,16 +22,23 @@ export class LoginService {
     this.params = JSON.stringify(user);
     console.log(this.params);
 
-    this.requestString = "grant_type=password&username=" + user.Name + " &password=" + user.Password;
+    this.requestString = "grant_type=password&username=" + user.Username + " &password=" + user.Password;
 
     this.http.post('http://localhost:53596/token', this.requestString, { headers: this.headers } ).subscribe(
-      (data) => this.feedback = data.json(), ()=> {}, () => this.setsession(user.Id)
+      (data) => this.feedback = data.json(), ()=> {}, () => this.setsession(user)
 
     );
+    //we need an id.
+
   }
-  setsession(id: number){
+  setsession(user: User){
+    this.userService.getUserByUsername(user).subscribe( (data) => this.userId = data,
+      ()=> {}, () => {sessionStorage.setItem('userId', this.userId+'');
+    console.log(sessionStorage.getItem('userId'))
+    });
+
     sessionStorage.setItem('token', this.feedback.access_token);
-    sessionStorage.setItem('userId', id+'');
+
 
 
 

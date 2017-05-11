@@ -29,27 +29,26 @@ export class UserService {
       .post(this.url + 'Users', this.params, {headers: this.headers})
       .map((resp) => this.feedback = resp.json());
   }
-  getUserByNameAndPass(user: User): number{
-     
 
-    return 1;
+  getUserByUsername(user: User): Observable<number>{
+     return this.http.get(this.url + 'UserByUsername/' + user.Username).map( (response) => response.json() as number);
   }
 
   getAllUsers(): Observable<User[]> {
     return this.http
-      .get(this.url +  + 'api/Users')
+      .get(this.url +  + 'Users')
       .map(response => response.json() as User[]);
   }
 
   getUser(id: number): Observable<User> {
     return this.http
-      .get(this.url + '/Users/' + id)
+      .get(this.url + 'Users/' + id)
       .map(response => response.json() as User);
   }
 
   putUser(user: User) {
     this.params = JSON.stringify(user);
-    return this.http.put(this.url + 'User/' + user.Id,
+    return this.http.put(this.url + 'Users/' + user.Id,
       this.params, {headers: this.headers})
       .subscribe(resp => console.log(resp.ok));
   }
