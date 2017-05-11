@@ -5,20 +5,16 @@
       {{topic.Header}}
     </h3>
   </md-card-header>
-<md-card-content>
-  <md-list>
-    <md-list-item   *ngFor="let comment of topic.Comments">
-      <div class="comment-card">
-        <md-card>
-        {{comment.Date.replace('/Date(','').replace(')/','') | date:"MM/dd/yyyy"}}:
-        {{comment.Content}}
-          <p md-line> <md-divider></md-divider></p>
-        </md-card>
-      </div>
-    </md-list-item>
-  </md-list>
+  <md-card class="divider" *ngFor="let comment of topic.Comments">
+    <div class="comment-card" >
 
-</md-card-content>
+      {{comment.Date.replace('/Date(','').replace(')/','') | date:"MM/dd/yyyy"}}:
+      {{comment.Content}}
+
+      <p md-line> <md-divider ></md-divider></p>
+
+    </div>
+  </md-card>
 </md-card>
 <form *ngIf="isLoggedIn" (ngSubmit)="onSubmit()">
   <md-card>

@@ -1,7 +1,12 @@
 .comment-card{
-  width: 25%;
+  overflow: auto;
 }
 .headline{
   margin-left: 8%;
 }
-
+.divider{
+  margin: 2%;
+height: auto;
+  overflow: auto;
+  width: 40%;
+}
