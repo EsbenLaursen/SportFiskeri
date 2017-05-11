@@ -21,14 +21,19 @@ export class TopicService {
   }
 
 
-  createTopic(topic: Topic) : Observable<string> {
+  createTopic(topic: Topic): Observable<string> {
+    const id = sessionStorage.getItem('userid');
+
+    console.log(id);
+
+    console.log(parseInt(id,10));
     topic.WrittenByUser = {Id: 1};
     topic.Date = new Date();
     this.params = JSON.stringify(topic);
     console.log(sessionStorage.getItem('token'));
 
-    let t = sessionStorage.getItem('token');
-    this.headers.append('Authorization', 'Basic ' + t);
+    const t = sessionStorage.getItem('token');
+    this.headers.append('Authorization', 'Bearer ' + t);
 
     return this.http
       .post(this.url + 'Topics', this.params, {headers: this.headers})

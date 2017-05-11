@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {User} from '../Entities/User';
 import {Http, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
+import {find} from "rxjs/operator/find";
 @Injectable()
 export class UserService {
 
@@ -27,6 +28,11 @@ export class UserService {
     return this.http
       .post(this.url + 'Users', this.params, {headers: this.headers})
       .map((resp) => this.feedback = resp.json());
+  }
+  getUserByNameAndPass(user: User): number{
+     
+
+    return 1;
   }
 
   getAllUsers(): Observable<User[]> {
