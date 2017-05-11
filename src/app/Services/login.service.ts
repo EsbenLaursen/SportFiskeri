@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from "@angular/http";
 import {User} from "../Entities/User";
 import {UserService} from "./user.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class LoginService {
+
 
   requestString: string;
   userId: number;
@@ -17,25 +19,52 @@ export class LoginService {
 
   }
 
-  login(user:User)
+  login(user:User): Observable<any>
   {
     this.params = JSON.stringify(user);
     console.log(this.params);
 
     this.requestString = "grant_type=password&username=" + user.Username + " &password=" + user.Password;
 
-    this.http.post('http://localhost:53596/token', this.requestString, { headers: this.headers } ).subscribe(
-      (data) => this.feedback = data.json(), ()=> {}, () => this.setsession(user)
+   return this.http.post('http://localhost:53596/token', this.requestString, { headers: this.headers } ).map(
+      (resp) => this.feedback = resp.json()
+   //   (data) => this.feedback = data.json(),
+   //   ()=> {}, () => this.setsession(user) // finally
 
     );
-    //we need an id.
+
 
   }
-  setsession(user: User){
-    console.log('setsession: username:' + user.Username + 'password' + user.Password);
-    this.userService.getUserByUsername(user).subscribe( (data) => this.userId = data,
-      ()=> {}, () => sessionStorage.setItem('userId', this.userId+'')
+
+
+  setSession(id: number): boolean
+  {
+    if(id != null && id)
+    {
+      sessionStorage.setItem('userId', id+'');
+      sessionStorage.setItem('token', this.feedback.access_token);
+      return true;
+    } else
+    {
+        return false;
+    }
+
+
+  }
+
+
+  getUserId(user: User): Observable<number> {
+
+   return this.userService.getUserByUsername(user).map((data) => this.userId = data
+   //   () => {
+   //   }, () => sessionStorage.setItem('userId', this.userId + '')
     );
-    sessionStorage.setItem('token', this.feedback.access_token);
+
+
+
+  }
+  isLoggedIn(): boolean
+  {
+    return (sessionStorage.getItem('userId') != null && sessionStorage.getItem('userId') && parseInt(sessionStorage.getItem('userId'), 10)>0);
   }
 }

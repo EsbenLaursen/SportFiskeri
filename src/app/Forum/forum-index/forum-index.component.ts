@@ -3,6 +3,7 @@ import {Topic} from "../../Entities/Topic";
 import {TopicService} from "../../Services/topic.service";
 import has = Reflect.has;
 import {Router} from "@angular/router";
+import {LoginService} from "../../Services/login.service";
 
 @Component({
   selector: 'app-forum-index',
@@ -15,7 +16,8 @@ export class ForumIndexComponent implements OnInit {
   topics: Topic[];
 
   constructor(private tservice:TopicService,
-  private router: Router) {
+  private router: Router,
+  private loginService: LoginService) {
     this.isCreatingTopic = false;
 
 this.topics= [];
@@ -29,7 +31,7 @@ this.topics= [];
 
   }
   ShowAddTopic(show:boolean){
-      if(sessionStorage.getItem('userId') != null && sessionStorage.getItem('userId') && parseInt(sessionStorage.getItem('userId'), 10)>0)
+      if(this.loginService.isLoggedIn())
       {
         this.isCreatingTopic = show;
       } else {
@@ -42,13 +44,14 @@ this.topics= [];
 
   AddTopic(topic: Topic)
   {
+    let topicReceived;
     this.ShowAddTopic(false);
     if(topic !== null && topic){
-      this.tservice.createTopic(topic).subscribe((data) => {
+      this.tservice.createTopic(topic).subscribe((data) => { topicReceived = data;
         this.tservice.getAllTopics().subscribe((topicsNew) => {
           this.topics = topicsNew;
         });
-      }, (err) => console.log(err));
+      }, (err) => console.log(err), () => console.log('TopicReceived: ' + JSON.stringify(topicReceived)));
 
     }
 

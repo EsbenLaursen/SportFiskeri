@@ -7,6 +7,7 @@ import {myData, MyDataService} from '../../Services/my-data.service';
 import {Observable} from 'rxjs/Observable';
 import {Comment} from '../../Entities/Comment';
 import {CommentService} from '../../Services/comment.service';
+import {LoginService} from "../../Services/login.service";
 
 @Component({
   selector: 'app-topicdetail',
@@ -16,6 +17,7 @@ import {CommentService} from '../../Services/comment.service';
 export class TopicdetailComponent implements OnInit {
 
 
+  isLoggedIn: boolean;
 
   topic: Topic;
   id: number;
@@ -25,6 +27,7 @@ export class TopicdetailComponent implements OnInit {
               private commentService: CommentService,
               private sharedService: MyDataService,
               private  topicService: TopicService,
+              private loginService: LoginService,
               private router: Router) {
     this.sharedService = sharedService;
 
@@ -45,6 +48,7 @@ export class TopicdetailComponent implements OnInit {
 
   ngOnInit() {
     this.service.getTopic( this.id).subscribe( (data) => this.topic = data);
+    this.isLoggedIn = this.loginService.isLoggedIn();
   }
 
     onSubmit() {
@@ -66,8 +70,8 @@ export class TopicdetailComponent implements OnInit {
   }
   deleteTopic()
   {
-      this.topicService.deleteTopic(this.topic);
-      this.router.navigate(['/forum']);
+      this.topicService.deleteTopic(this.topic).subscribe((data)=> console.log('received from deleteTopic service: ' + data), ()=> {}, ()=> this.router.navigate(['/forum'])  );
+
   }
 
 }

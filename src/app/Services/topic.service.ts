@@ -21,23 +21,22 @@ export class TopicService {
   }
 
 
-  createTopic(topic: Topic): Observable<string> {
-    const id = sessionStorage.getItem('userid');
-
-    console.log(id);
-
-    console.log(parseInt(id,10));
-    topic.WrittenByUser = {Id: 1};
+  createTopic(topic: Topic): Observable<Topic> {
+    // Getting the session id
+    const id = sessionStorage.getItem('userId');
+    //topic is created with specific id
+    topic.WrittenByUser = {Id: parseInt(id,10)};
     topic.Date = new Date();
     this.params = JSON.stringify(topic);
-    console.log(sessionStorage.getItem('token'));
 
+    //getting the token for the logged in user
     const t = sessionStorage.getItem('token');
     this.headers.append('Authorization', 'Bearer ' + t);
 
+    let topicReceived;
     return this.http
       .post(this.url + 'Topics', this.params, {headers: this.headers})
-      .map((resp) => this.feedback = resp.json());
+      .map((resp) => topicReceived = resp.json() as Topic);
   }
 
   getAllTopics(): Observable<Topic[]> {
@@ -65,7 +64,7 @@ export class TopicService {
     this.headers.append('Authorization', 'Basic ' + t);
 
       return this.http.delete(this.url + 'Topics/' + topic.Id,  {headers: this.headers})
-        .subscribe(resp => console.log(resp.ok));
+        .map(resp => console.log(resp.ok));
 
 
   }

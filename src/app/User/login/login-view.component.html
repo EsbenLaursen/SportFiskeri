@@ -1,6 +1,7 @@
 <form class="login" (ngSubmit)="tryLogin($event)">
   <div fxFlexFill [fxLayout]="'row'" fxLayoutAlign="center center">
     <md-card class="login-card">
+      <p *ngIf="loginError && loginError.length < 0">{{loginError}}</p>
       <md-card-content>
         <md-input-container>
           <input mdInput name="username" placeholder="Username" [(ngModel)]="user.Username"/>

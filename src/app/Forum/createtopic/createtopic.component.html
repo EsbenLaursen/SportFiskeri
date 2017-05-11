@@ -2,6 +2,6 @@
   createtopic works!
 </p>
 <input placeholder="Title..." type="text" required [(ngModel)]="topic.Header"/>
-<input placeholder="Content..." type="text"/>
+<input placeholder="Content..." type="text" required [(ngModel)]="topic.Description"/>
 <button (click)="creatingNewTopic(false)"> cancel </button>
 <button (click)="creatingNewTopic(true)"> save </button>

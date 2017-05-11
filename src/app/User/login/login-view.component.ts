@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {User} from "../../Entities/User";
 
 @Component({
@@ -9,6 +9,9 @@ import {User} from "../../Entities/User";
 export class LoginViewComponent implements OnInit {
 
   user: User;
+
+  @Input()
+  loginError: string;
 
   @Output('login')
   tryloginEmitter = new EventEmitter();
@@ -21,8 +24,7 @@ export class LoginViewComponent implements OnInit {
   }
 
 
-  tryLogin()
-  {
-     this.tryloginEmitter.emit(this.user);
+  tryLogin() {
+    this.tryloginEmitter.emit(this.user);
   }
 }

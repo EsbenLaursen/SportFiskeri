@@ -14,14 +14,13 @@
         {{comment.Content}}
           <p md-line> <md-divider></md-divider></p>
         </md-card>
-
       </div>
     </md-list-item>
   </md-list>
 
 </md-card-content>
 </md-card>
-<form (ngSubmit)="onSubmit()">
+<form *ngIf="isLoggedIn" (ngSubmit)="onSubmit()">
   <md-card>
     <md-card-content>
     <input type="text" placeholder="Your comment..." [(ngModel)]="comment.Content" name="content" >
@@ -32,6 +31,9 @@
   </md-card>
 
 </form>
+<p *ngIf="!isLoggedIn"> Please log in to comment</p>
+
+
 <button md-button (click)="editHeader()"> edit header </button>
 <button md-button (click)="deleteTopic()"> delete topic </button>
 

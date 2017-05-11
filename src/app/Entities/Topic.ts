@@ -6,6 +6,7 @@ import {User} from './User';
 export class Topic {
   Id: number;
   Header?: string;
+  Description?: string;
   Comments?: Comment[];
   WrittenByUser?: User;
   Date?: Date;
