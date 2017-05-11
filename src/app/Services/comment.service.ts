@@ -27,6 +27,7 @@ export class CommentService {
     comment.Date = new Date();
 
 
+
     this.headers.append('Content-Type', 'application/json');
     this.params = JSON.stringify(comment);
     console.log('trying to create comment' + this.params);

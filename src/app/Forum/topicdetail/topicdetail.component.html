@@ -1,22 +1,37 @@
-<div> yoooooooo</div>
 
-<p>
-  {{topic.Header}}
-</p>
-<div *ngFor="let comment of topic.Comments">
-  {{comment.Content}}
-</div>
+<md-card>
+  <md-card-header class="headline">
+    <h3>
+      {{topic.Header}}
+    </h3>
+  </md-card-header>
+<md-card-content>
+  <md-list>
+    <md-list-item   *ngFor="let comment of topic.Comments">
+      <div class="comment-card">
+        <md-card>
+        {{comment.Date.replace('/Date(','').replace(')/','') | date:"MM/dd/yyyy"}}:
+        {{comment.Content}}
+          <p md-line> <md-divider></md-divider></p>
+        </md-card>
 
+      </div>
+    </md-list-item>
+  </md-list>
+
+</md-card-content>
+</md-card>
 <form (ngSubmit)="onSubmit()">
   <md-card>
     <md-card-content>
     <input type="text" placeholder="Your comment..." [(ngModel)]="comment.Content" name="content" >
+      <button md-button type="submit">
+      Add comment
+    </button>
     </md-card-content>
   </md-card>
-  <button type="submit">
-    Add comment
-  </button>
+
 </form>
-<button (click)="editHeader()"> edit header </button>
-<button (click)="deleteTopic()"> delete </button>
+<button md-button (click)="editHeader()"> edit header </button>
+<button md-button (click)="deleteTopic()"> delete topic </button>
 

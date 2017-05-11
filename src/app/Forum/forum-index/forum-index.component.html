@@ -1,4 +1,4 @@
-<p>Welcome to the forum</p>
-<button *ngIf="!isCreatingTopic" (click)="ShowAddTopic(true)">Add topic</button>
+<h2>Welcome to the forum</h2>
+<button md-button class="md-primary" *ngIf="!isCreatingTopic" (click)="ShowAddTopic(true)">Add topic</button>
 <app-createtopic *ngIf="isCreatingTopic" (createTopicDone)="AddTopic($event)"></app-createtopic>
 <app-topiclist [topics]="topics"></app-topiclist>

@@ -1,3 +1,13 @@
-<div (click)="goToTopic(topic.Id)">
-  Topics: {{topic.Header}}
-</div>
+
+<md-card class="list" (click)="goToTopic(topic.Id)">
+  <md-card-content>
+    <md-list >
+      <md-list-item >
+        <h3 md-line> Title : {{topic.Header}}</h3>
+        <h5 md-line>  Created : {{topic.Date.replace('/Date(','').replace(')/','') | date:"MM/dd/yyyy"}}</h5>
+        <p md-line> <md-divider></md-divider></p>
+      </md-list-item>
+    </md-list>
+  </md-card-content>
+</md-card>
+
