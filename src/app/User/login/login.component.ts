@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   loginNow(user: User)
   {
 
-    console.log('username: ' + user.Name);
+    console.log('username: ' + user.Username);
     console.log('Password: ' + user.Password);
 
 this.loginservice.login(user);

@@ -10,8 +10,6 @@ import {Router} from "@angular/router";
 })
 export class CreatetopicComponent implements OnInit {
 
- // vi kommer til jeres by vi ødelægger det hele, knepper jeres mødre og vi vil ikk dele
-  // while horny
 
   saveOrCancel: boolean;
 

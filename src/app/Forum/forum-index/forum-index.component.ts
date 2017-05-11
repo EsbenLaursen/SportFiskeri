@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Topic} from "../../Entities/Topic";
 import {TopicService} from "../../Services/topic.service";
+import has = Reflect.has;
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-forum-index',
@@ -12,7 +14,8 @@ export class ForumIndexComponent implements OnInit {
   isCreatingTopic: boolean;
   topics: Topic[];
 
-  constructor(private tservice:TopicService) {
+  constructor(private tservice:TopicService,
+  private router: Router) {
     this.isCreatingTopic = false;
 
 this.topics= [];
@@ -22,12 +25,18 @@ this.topics= [];
     this.tservice.getAllTopics().subscribe((data) => {
       this.topics = data;
     });
+    console.log('in forumindex sessionid'+sessionStorage.getItem('userId'));
 
   }
   ShowAddTopic(show:boolean){
+      if(sessionStorage.getItem('userId') != null && sessionStorage.getItem('userId') && parseInt(sessionStorage.getItem('userId'), 10)>0)
+      {
+        this.isCreatingTopic = show;
+      } else {
 
-      this.isCreatingTopic = show;
-  }
+        this.router.navigate(['/login']);
+      }
+       }
 
 
 
@@ -49,7 +58,6 @@ this.topics= [];
   createTopic(saveOrCancel: boolean)
   {
     this.isCreatingTopic = saveOrCancel;
-    console.log('in forum-index: createTopic' + saveOrCancel);
   }
 
 }

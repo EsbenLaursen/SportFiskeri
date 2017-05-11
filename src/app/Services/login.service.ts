@@ -32,15 +32,10 @@ export class LoginService {
 
   }
   setsession(user: User){
+    console.log('setsession: username:' + user.Username + 'password' + user.Password);
     this.userService.getUserByUsername(user).subscribe( (data) => this.userId = data,
-      ()=> {}, () => {sessionStorage.setItem('userId', this.userId+'');
-    console.log(sessionStorage.getItem('userId'))
-    });
-
+      ()=> {}, () => sessionStorage.setItem('userId', this.userId+'')
+    );
     sessionStorage.setItem('token', this.feedback.access_token);
-
-
-
-
   }
 }

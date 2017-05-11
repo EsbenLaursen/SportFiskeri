@@ -16,5 +16,6 @@ export class ToptoolbarComponent implements OnInit {
   clearSession()
   {
       sessionStorage.clear();
+      console.log('session clear: userId= ' + sessionStorage.getItem('userId'));
   }
 }

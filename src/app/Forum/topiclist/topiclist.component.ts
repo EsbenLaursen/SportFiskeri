@@ -19,9 +19,6 @@ export class TopiclistComponent implements OnInit {
   }
 
   ngOnInit() {
-
-      console.log(!!this.topics);
-      console.log(this.topics.length);
   }
 
 

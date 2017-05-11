@@ -31,7 +31,7 @@ export class UserService {
   }
 
   getUserByUsername(user: User): Observable<number>{
-     return this.http.get(this.url + 'UserByUsername/' + user.Username).map( (response) => response.json() as number);
+     return this.http.get(this.url + 'UserByUsername?Username=' + user.Username).map( (response) => response.json() as number);
   }
 
   getAllUsers(): Observable<User[]> {
