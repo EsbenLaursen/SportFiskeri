@@ -20,30 +20,22 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.errormsg = "";
+   // this.errormsg = "";
 }
 
   loginNow(user: User)
   {
-
-
-
-    console.log('username: ' + user.Username);
-    console.log('Password: ' + user.Password);
-
   let id;
-    this.loginservice.login(user).subscribe((data) => this.feedback = data, (err)=>{this.errormsg = "Username or password is wrong, try again"}, ()=> {this.loginservice.getUserId(user).subscribe(
-       (data2) => id=data2, ()=> {this.loginservice.setSession(id);
-        //this.snackBar.open("Logging", "OK", { duration: 3000 });
+    this.loginservice.login(user).subscribe((data) => this.feedback = data, (err)=>{ this.errormsg = 'Username or password is wrong, try again';},
+      ()=> {this.loginservice.getUserId(user).subscribe(
+       (data2) => id=data2,
+        ()=> {this.loginservice.setSession(id);
        });
       this.router.navigate(['/home']).then(() => {
         this.snackBar.open("You are logged in", "Ok", {
           duration: 3000,
-        })});
-      this.errormsg ="";
+        });});
       });
-
-
   }
 
 }
