@@ -2,17 +2,25 @@
 <md-card>
   <md-card-header class="headline">
     <h3>
-      {{topic.Header}}
+      {{topic.Header}} - Created by {{userCreatedTopic.Name}}
     </h3>
+    <button md-button *ngIf="userCanEditDelete" (click)="editHeader()">Edit</button>
   </md-card-header>
-  <md-card class="divider" *ngFor="let comment of topic.Comments">
+  <md-card>
+    {{topic.Description}}
+  </md-card>
+
+  <md-card class="divider" *ngFor="let c of sortedByTopicIdComments">
     <div class="comment-card" >
 
-      {{comment.Date.replace('/Date(','').replace(')/','') | date:"MM/dd/yyyy"}}:
-      {{comment.Content}}
+      {{c.Date.replace('/Date(','').replace(')/','') | date:"MM/dd/yyyy"}}:
+      {{c.Content}}
 
       <p md-line> <md-divider ></md-divider></p>
 
+      writtenbyuser:{{c.WrittenByUser.Id}} loggedinuserid:{{loggedInUserId}}
+      <button md-button *ngIf="c.WrittenByUser.Id === loggedInUserId" (click)="deleteComment(c.Id)">Delete comment</button>
+      <button md-button *ngIf="c.WrittenByUser.Id === loggedInUserId">Edit comment</button>
     </div>
   </md-card>
 </md-card>
@@ -29,7 +37,6 @@
 </form>
 <p *ngIf="!isLoggedIn"> Please log in to comment</p>
 
+<button md-button *ngIf="userCanEditDelete" (click)="deleteTopic()">DELETE TOPIC </button>
 
-<button md-button (click)="editHeader()"> edit header </button>
-<button md-button (click)="deleteTopic()"> delete topic </button>
 
