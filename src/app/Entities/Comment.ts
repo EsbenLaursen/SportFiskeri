@@ -9,5 +9,6 @@ import {User} from './User';
     Topic: Topic;
     TopicId: number;
     WrittenByUser: User;
+    WrittenByUserId: number;
     Date: Date;
 }

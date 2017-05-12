@@ -37,12 +37,14 @@ export class LoginService {
   }
 
 
-  setSession(id: number): boolean
+  setSession(id: number, accessToken: string): boolean
   {
+    console.log('userId: '+id);
+    console.log('token: '+accessToken);
     if(id != null && id)
     {
       sessionStorage.setItem('userId', id+'');
-      sessionStorage.setItem('token', this.feedback.access_token);
+      sessionStorage.setItem('token', accessToken);
       return true;
     } else
     {
@@ -55,11 +57,7 @@ export class LoginService {
 
   getUserId(user: User): Observable<number> {
 
-   return this.userService.getUserByUsername(user).map((data) => this.userId = data
-   //   () => {
-   //   }, () => sessionStorage.setItem('userId', this.userId + '')
-    );
-
+    return this.userService.getUserByUsername(user).map((resp) => this.userId = resp);
 
 
   }

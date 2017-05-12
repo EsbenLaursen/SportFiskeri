@@ -28,6 +28,7 @@ this.topics= [];
       this.topics = data;
     });
     console.log('in forumindex sessionid'+sessionStorage.getItem('userId'));
+    console.log('in forumindex token'+sessionStorage.getItem('token'));
 
   }
   ShowAddTopic(show:boolean){

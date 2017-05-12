@@ -29,12 +29,14 @@ export class LoginComponent implements OnInit {
     this.loginservice.login(user).subscribe((data) => this.feedback = data, (err)=>{ this.errormsg = 'Username or password is wrong, try again';},
       ()=> {this.loginservice.getUserId(user).subscribe(
        (data2) => id=data2,
-        ()=> {this.loginservice.setSession(id);
+        ()=>{},
+        ()=> {this.loginservice.setSession(id, this.feedback.access_token);
+          this.router.navigate(['/home']).then(() => {
+            this.snackBar.open("You are logged in", "Ok", {
+              duration: 3000,
+            });});
        });
-      this.router.navigate(['/home']).then(() => {
-        this.snackBar.open("You are logged in", "Ok", {
-          duration: 3000,
-        });});
+
       });
   }
 

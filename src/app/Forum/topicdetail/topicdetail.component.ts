@@ -8,6 +8,9 @@ import {Observable} from 'rxjs/Observable';
 import {Comment} from '../../Entities/Comment';
 import {CommentService} from '../../Services/comment.service';
 import {LoginService} from "../../Services/login.service";
+import {UserService} from "../../Services/user.service";
+import {User} from "../../Entities/User";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-topicdetail',
@@ -18,60 +21,93 @@ export class TopicdetailComponent implements OnInit {
 
 
   isLoggedIn: boolean;
+  userCanEditDelete: boolean = false;
+  userCreatedTopic: User;
+
+  loggedInUserId: number;
 
   topic: Topic;
   id: number;
   comment: Comment;
+  comments: Comment[];
+  sortedByTopicIdComments: Comment[];
 
-  constructor(private service: TopicService,
-              private commentService: CommentService,
+  constructor(private commentService: CommentService,
               private sharedService: MyDataService,
               private  topicService: TopicService,
+              private  userService: UserService,
               private loginService: LoginService,
               private router: Router) {
+
     this.sharedService = sharedService;
-
-    // til lars
-   // this._router
-   //  .queryParams
-   //  .subscribe(params => this.id = params['topicId']);
-
     this.id = this.sharedService.getData();
-    console.log(this.id + 'id');
-
-
     this.comment = new Comment();
+    this.comment.WrittenByUser = new User();
     this.topic = new Topic();
+    this.userCreatedTopic = new User();
+    this.loggedInUserId = 0;
+    this.sortedByTopicIdComments = [];
     this.topic.Header = '' +
       'Loading comments...';
   }
 
   ngOnInit() {
-    this.service.getTopic( this.id).subscribe( (data) => this.topic = data);
-    this.isLoggedIn = this.loginService.isLoggedIn();
+ this.topicService.getTopic( this.id).subscribe( (data) => this.topic = data, ()=>{}, ()=>{
+      this.initUser();
+    });
+
+
   }
+
+  initUser(){
+    console.log('topic writtenby: '+this.topic.WrittenByUser.Id);
+
+    this.userCreatedTopic = this.topic.WrittenByUser;
+    this.isLoggedIn = this.loginService.isLoggedIn();
+    if(this.isLoggedIn)
+    {
+      this.loggedInUserId = parseInt(sessionStorage.getItem('userId'), 10);
+      if(this.loggedInUserId === this.topic.WrittenByUser.Id)
+      {
+        console.log('can edit');
+        this.userCanEditDelete = true;
+      }
+    }
+    this.getComments();
+  }
+
+  private getComments() {
+    this.commentService.getAllComments().subscribe((data) => this.comments = data, () => {
+    }, () => {
+      this.sortedByTopicIdComments = this.commentService.sortList(this.comments, this.id) });
+  }
+
+
 
     onSubmit() {
 
-       this.comment.Topic = this.topic;
+      this.comment.Topic = this.topic;
       this.comment.TopicId = this.topic.Id;
-         this.commentService.createComment2(this.comment).subscribe( (result) => console.log(result), (err) => console.log(err),
-         () =>  this.service.getTopic( this.id).subscribe( (data) => this.topic = data));
-
-      this.service.getTopic( this.id).subscribe( (data) => this.topic = data), (err) => console.log(err);
-
-
-
+         this.commentService.createComment(this.comment).subscribe( () => {}, (err ) => {console.log(err)},
+           () =>  this.topicService.getTopic( this.id).subscribe( (data) => this.topic = data, ()=>{}, ()=> this.getComments()));
     }
 
   editHeader()
   {
+      if(this.loginService.isLoggedIn)
+      {
+
+      }
       this.topicService.putTopic(this.topic);
   }
   deleteTopic()
   {
       this.topicService.deleteTopic(this.topic).subscribe((data)=> console.log('received from deleteTopic service: ' + data), ()=> {}, ()=> this.router.navigate(['/forum'])  );
 
+  }
+  deleteComment(id: number)
+  {
+      this.commentService.deleteComment(id);
   }
 
 }
