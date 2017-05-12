@@ -23,9 +23,9 @@ export class TopicdetailComponent implements OnInit {
   isLoggedIn: boolean;
   userCanEditDelete: boolean = false;
   userCreatedTopic: User;
-
+  isEditingCommment: boolean;
   loggedInUserId: number;
-
+  tempComment: string;
   topic: Topic;
   id: number;
   comment: Comment;
@@ -49,6 +49,8 @@ export class TopicdetailComponent implements OnInit {
     this.sortedByTopicIdComments = [];
     this.topic.Header = '' +
       'Loading comments...';
+    this.isEditingCommment = false;
+
   }
 
   ngOnInit() {
@@ -91,6 +93,27 @@ export class TopicdetailComponent implements OnInit {
          this.commentService.createComment(this.comment).subscribe( () => {}, (err ) => {console.log(err)},
            () =>  this.topicService.getTopic( this.id).subscribe( (data) => this.topic = data, ()=>{}, ()=> this.getComments()));
     }
+  isEditing(comment: Comment)
+  {
+    this.isEditingCommment = true;
+    this.tempComment = comment.Content;
+  }
+
+  edit(comment: Comment, saveComment: boolean)
+  {
+
+    console.log('in edit- comment' + comment.Content + ' bool: ' + saveComment )
+    console.log('tempcomment: ' + this.tempComment )
+    this.isEditingCommment = false;
+    if(saveComment)
+    {
+      this.editComment(comment);
+    } else
+    {
+      this.comment.Content = this.tempComment;
+      this.getComments();
+    }
+  }
 
   editHeader()
   {
@@ -107,7 +130,11 @@ export class TopicdetailComponent implements OnInit {
   }
   deleteComment(id: number)
   {
-      this.commentService.deleteComment(id);
+      this.commentService.deleteComment(id).subscribe((data)=> console.log('received from deleteComment service: ' + data), ()=> {}, ()=> this.getComments());
   }
-
+  editComment(c: Comment)
+  {
+    console.log('updated:' + c.Content);
+    this.commentService.putComment(c).subscribe((data)=> console.log('received from editComment service: ' + data), ()=> {}, ()=> this.getComments());
+  }
 }

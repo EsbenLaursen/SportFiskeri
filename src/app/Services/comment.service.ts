@@ -17,6 +17,7 @@ export class CommentService {
 
   constructor(private http: Http,
               private service: UserService) {
+    this.headers.append('Content-Type', 'application/json');
   }
 
 
@@ -68,11 +69,28 @@ export class CommentService {
   }
 
   deleteComment(id: number)
-    { let t = sessionStorage.getItem('token');
-    this.headers.append('Authorization', 'Basic ' + t);
-      this.http.delete(this.url + 'Comments/' + id).map((resp) => console.log('deleting comment: ' + resp.ok));
+    {
+      console.log('deleting comment' + id);
+   //   let t = sessionStorage.getItem('token');
+  //  this.headers.append('Authorization', 'Basic ' + t);
+      return this.http.delete(this.url + 'Comments/' + id, { headers: this.headers }).map((resp) => console.log('deleting comment: ' + resp.ok));
   }
 
+  putComment(comment: Comment) {
+    this.params = JSON.stringify(comment);
+    console.log(this.params);
+   ////let t = sessionStorage.getItem('token');
+   //this.headers.append('Authorization', 'Basic ' + t);
+    return this.http.put(this.url + 'Comments/' + comment.Id, this.params, { headers: this.headers} );
+
+
+
+   // topic.Header = 'new title' + topic.Id;
+   // this.params = JSON.stringify(topic);
+   // return this.http.put(this.url + 'Topics/' + topic.Id,
+   //   this.params, {headers: this.headers})
+   //   .subscribe(resp => console.log(resp.ok));
+  }
 }
 
 

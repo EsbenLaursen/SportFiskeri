@@ -20,7 +20,10 @@
 
       writtenbyuser:{{c.WrittenByUser.Id}} loggedinuserid:{{loggedInUserId}}
       <button md-button *ngIf="c.WrittenByUser.Id === loggedInUserId" (click)="deleteComment(c.Id)">Delete comment</button>
-      <button md-button *ngIf="c.WrittenByUser.Id === loggedInUserId">Edit comment</button>
+      <button md-button *ngIf="!isEditingCommment && c.WrittenByUser.Id === loggedInUserId" (click)="isEditing(c)" >Edit</button>
+      <input type="text" name="content" [(ngModel)]="c.Content" *ngIf="isEditingCommment && c.WrittenByUser.Id === loggedInUserId" />
+      <button md-button *ngIf="isEditingCommment && c.WrittenByUser.Id === loggedInUserId" (click)="edit(c, true)" >Save</button>
+      <button md-button *ngIf="isEditingCommment && c.WrittenByUser.Id === loggedInUserId" (click)="edit(c, false)" >Cancel</button>
     </div>
   </md-card>
 </md-card>
