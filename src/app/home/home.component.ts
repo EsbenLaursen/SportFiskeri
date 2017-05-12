@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FishService} from "../Services/fish.service";
 import {Observable} from "rxjs/Observable";
 import {Fish} from "../Entities/Fish";
@@ -11,11 +11,14 @@ import {forEach} from "@angular/router/src/utils/collection";
 })
 export class HomeComponent implements OnInit {
 
-klessthan: number;
-kmorethan: number;
+  klessthan: number;
+  kmorethan: number;
   smorethan: number;
   slessthan: number;
-  isReached: boolean;
+  isReachedsless: boolean;
+  isReachedSMore: boolean;
+  isReachedKLess: boolean;
+  isReachedKMore: boolean;
   fish: Fish[];
 
   constructor(private fishserive: FishService) {
@@ -23,38 +26,47 @@ kmorethan: number;
     this.kmorethan = 0;
     this.slessthan = 0;
     this.smorethan = 0;
-    this.isReached = false;
-
+    this.isReachedsless = false;
+    this.isReachedSMore = false;
+    this.isReachedKLess = false;
+    this.isReachedKMore = false;
 
   }
 
   ngOnInit() {
-    this.fishserive.getallfishes().subscribe((data)=> this.fish = data,(err) => console.log(err),()=> this.sortFish());
+    this.fishserive.getallfishes().subscribe((data) => this.fish = data, (err) => console.log(err), () => this.sortFish());
 
   }
 
-  sortFish(){
-  for(let i = 0; i<this.fish.length; i++) {
-    const f = this.fish[i];
-    if(f.Location === 'Konge å')
-    {
-      if (f.Length < 75) {
-        this.klessthan++;
+  sortFish() {
+    for (let i = 0; i < this.fish.length; i++) {
+      const f = this.fish[i];
+      if (f.Location === 'Konge å') {
+        if (f.Length < 75) {
+          this.klessthan++;
+        } else {
+          this.kmorethan++;
+        }
       } else {
-        this.kmorethan++;
+        if (f.Length < 75) {
+          this.slessthan++;
+        } else {
+          this.smorethan++;
+        }
       }
-    }else {
-      if (f.Length < 75) {
-        this.slessthan++;
-      } else {
-        this.smorethan++;
+      // make field red when quota is reached
+      if (this.slessthan >= 15) {
+        this.isReachedsless = true;
+      }
+      if (this.smorethan >= 15) {
+        this.isReachedSMore = true;
+      }
+      if (this.klessthan >= 15) {
+        this.isReachedKLess = true;
+      }
+      if (this.kmorethan >= 15) {
+        this.isReachedKMore = true;
       }
     }
-    if(this.slessthan >=15)
-    {
-      this.isReached = true;
-    }
-
-
-
-  }}}
+  }
+}

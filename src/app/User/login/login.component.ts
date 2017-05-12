@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit {
   loginNow(user: User)
   {
   let id;
-    this.loginservice.login(user).subscribe((data) => this.feedback = data, (err)=>{ this.errormsg = 'Username or password is wrong, try again';},
-      ()=> {this.loginservice.getUserId(user).subscribe(
-       (data2) => id=data2,
+    this.loginservice.login(user).subscribe((data) => this.feedback = data,
+      (err)=>{ this.errormsg = 'Username or password is wrong, try again';},
+      ()=> {this.loginservice.getUserId(user)
+        .subscribe((data2) => id=data2,
         ()=> {this.loginservice.setSession(id);
        });
       this.router.navigate(['/home']).then(() => {

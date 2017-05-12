@@ -10,15 +10,19 @@
   </tr>
   <tr>
   <th>Konge å</th>
-    <td>{{klessthan}}/15</td>
-    <td>{{kmorethan}}/15</td>
+    <td class="reached" *ngIf="isReachedKLess">{{klessthan}}/15</td>
+    <td *ngIf="!isReachedKLess">{{klessthan}}/15</td>
+
+    <td class="reached" *ngIf="isReachedKMore">{{kmorethan}}/15</td>
+    <td *ngIf="!isReachedKMore">{{kmorethan}}/15</td>
 </tr>
   <tr>
     <th>Sneum å</th>
-    <td id="reached" *ngIf="isReached">{{slessthan}}/15</td>
+    <td class="reached" *ngIf="isReachedsless">{{slessthan}}/15</td>
+    <td *ngIf="!isReachedsless">{{slessthan}}/15</td>
 
-    <td *ngIf="!isReached">{{slessthan}}/15</td>
-    <td>{{smorethan}}/15</td>
+    <td class="reached" *ngIf="isReachedsless">{{smorethan}}/15</td>
+    <td *ngIf="!isReachedsless">{{smorethan}}/15</td>
   </tr>
 
 
