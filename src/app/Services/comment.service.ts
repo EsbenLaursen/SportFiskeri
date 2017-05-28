@@ -34,8 +34,10 @@ export class CommentService {
 
     this.headers.append('Content-Type', 'application/json');
     this.params = JSON.stringify(comment);
-    console.log('trying to create comment' + this.params);
 
+    //getting the token for the logged in user
+    const t = sessionStorage.getItem('token');
+    this.headers.append('Authorization', 'Bearer ' + t);
 
     return this.http
       .post(this.url + 'Comments', this.params, { headers: this.headers})

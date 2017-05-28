@@ -29,9 +29,14 @@ export class FishService {
 
 
   createFish(fish:Fish): Observable<Fish>{
-    fish.CaughtByUser = {Id: 1};
-    fish.CaughtByUserId = 1;
+    const userid = parseInt(sessionStorage.getItem("userId"),10);
+    fish.CaughtByUser = {Id: userid};
+    fish.CaughtByUserId = userid;
     const para = JSON.stringify(fish);
+
+    //getting the token for the logged in user
+    const t = sessionStorage.getItem('token');
+    this.headers.append('Authorization', 'Bearer ' + t);
 
     console.log('parameter object: '+para);
     return this.http
