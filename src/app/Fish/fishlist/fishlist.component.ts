@@ -22,7 +22,7 @@ export class FishlistComponent implements OnInit {
     {
       console.log('event true');
     }
-    this.fishservice.getallfishes().subscribe((res) => this.fish = res);
+    this.fishservice.getallfishes().subscribe((res) => this.fish = res, ()=> {}, ()=> {console.log(JSON.stringify(this.fish[this.fish.length-1]))});
   }
 
 }

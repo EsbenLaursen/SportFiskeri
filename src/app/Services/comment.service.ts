@@ -85,13 +85,6 @@ export class CommentService {
    //this.headers.append('Authorization', 'Basic ' + t);
     return this.http.put(this.url + 'Comments/' + comment.Id, this.params, { headers: this.headers} );
 
-
-
-   // topic.Header = 'new title' + topic.Id;
-   // this.params = JSON.stringify(topic);
-   // return this.http.put(this.url + 'Topics/' + topic.Id,
-   //   this.params, {headers: this.headers})
-   //   .subscribe(resp => console.log(resp.ok));
   }
 }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../Services/login.service";
 
 @Component({
   selector: 'app-toptoolbar',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToptoolbarComponent implements OnInit {
 
+
+  isloggedin: boolean;
   constructor() { }
 
   ngOnInit() {
+
   }
 
 
@@ -18,4 +22,6 @@ export class ToptoolbarComponent implements OnInit {
       sessionStorage.clear();
       console.log('session clear: userId= ' + sessionStorage.getItem('userId'));
   }
+
+
 }
